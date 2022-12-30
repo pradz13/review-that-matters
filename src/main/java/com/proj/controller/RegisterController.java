@@ -6,6 +6,7 @@ import com.proj.repository.UserRepository;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,6 +19,9 @@ public class RegisterController {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
 
     @RequestMapping("/signup")
     public String register(Model model) {
@@ -35,6 +39,7 @@ public class RegisterController {
             }
             user.setRole("ROLE_USER");
             user.setEnabled(true);
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
             this.userRepository.save(user);
             model.addAttribute("user", new User());
             httpSession.setAttribute("message", new Message("Successfully registered", "alert-success"));
