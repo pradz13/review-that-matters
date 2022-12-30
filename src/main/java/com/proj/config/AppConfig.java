@@ -34,8 +34,8 @@ public class AppConfig {
     }
 
     @Bean
-    public AuthenticationManager authManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
-        return authenticationConfiguration.getAuthenticationManager();
+    public AuthenticationManager authManager(AuthenticationConfiguration configuration) throws Exception {
+        return configuration.getAuthenticationManager();
     }
 
     @Bean
@@ -44,8 +44,8 @@ public class AppConfig {
                 .csrf()
                 .disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/admin/**").hasRole("ROLE_ADMIN")
-                .requestMatchers("/user/**").hasRole("ROLE_USER")
+                .requestMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
+                .requestMatchers("/user/**").hasAuthority("ROLE_USER")
                 .requestMatchers("/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
