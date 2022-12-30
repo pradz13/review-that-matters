@@ -1,6 +1,8 @@
 package com.proj.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +14,8 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+    @NotBlank(message = "Name field is required.")
+    @Size(min = 2, message = "Minimum 2 characters are allowed in the name field.")
     private String name;
 
     @Column(unique = true)

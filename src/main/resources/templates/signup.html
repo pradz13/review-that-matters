@@ -12,18 +12,21 @@
                 <div class="my-card">
                     <div th:if="${session.message}" th:classappend="${session.message.type}" class="alert" role="alert">
                         <p class="text-center" th:text="${session.message.content}"></p>
-                        <!--<th:block th:text="${#session.removeAttribute('message')}"></th:block>-->
                     </div>
                     <div class="container text-center">
                         <img class="mx-auto" style="width: 50px;" src="" th:src="@{/img/register.png}"/>
                     </div>
 
                     <h1 class="text-center">Sign Up here</h1>
-                    <form action="" th:action="@{/do_signup}" method="post" th:object="${user}">
+                    <form novalidate action="" th:action="@{/do_signup}" method="post" th:object="${user}">
                         <div class="form-group">
                             <label for="name_field">Name</label>
-                            <input name="name" type="text" class="form-control" id="name_field" aria-describedby="nameHelp" placeholder="Enter name" th:value="${user.name}"required/>
+                            <input name="name" type="text" class="form-control"
+                                   th:classappend="${#fields.hasErrors('name')} ? 'is-invalid' : ''"
+                                   id="name_field" aria-describedby="nameHelp" placeholder="Enter name" th:value="${user.name}"required/>
                         </div>
+                        <!--<div class="invalid-feedback" th:each="e : ${#fields.errors('name')}" th:text="${e}"></div>-->
+                        <p class="alert alert-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
                         <div class="form-group">
                             <label for="email_field">Email</label>
                             <input name="email" type="email" class="form-control" id="email_field" aria-describedby="nameHelp" placeholder="Enter email" th:value="${user.email}" required/>

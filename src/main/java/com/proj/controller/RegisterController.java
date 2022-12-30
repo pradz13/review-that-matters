@@ -4,9 +4,11 @@ import com.proj.entities.User;
 import com.proj.helper.Message;
 import com.proj.repository.UserRepository;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,8 +27,13 @@ public class RegisterController {
     }
 
     @RequestMapping(value = "/do_signup", method = RequestMethod.POST)
-    public String registerUser(@ModelAttribute("user") User user, Model model, HttpSession httpSession) {
+    public String registerUser(@Valid @ModelAttribute("user") User user, BindingResult result, Model model, HttpSession httpSession) {
         try {
+            if(result.hasErrors()) {
+                System.out.println(result.toString());
+                model.addAttribute("user", user);
+                return "signup";
+            }
             System.out.println(user);
             user.setRole("ROLE_USER");
             user.setEnabled(true);
