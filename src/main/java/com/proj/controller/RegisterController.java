@@ -29,18 +29,16 @@ public class RegisterController {
     @RequestMapping(value = "/do_signup", method = RequestMethod.POST)
     public String registerUser(@Valid @ModelAttribute("user") User user, BindingResult result, Model model, HttpSession httpSession) {
         try {
-            if(result.hasErrors()) {
-                System.out.println(result.toString());
+            if (result.hasErrors()) {
                 model.addAttribute("user", user);
                 return "signup";
             }
-            System.out.println(user);
             user.setRole("ROLE_USER");
             user.setEnabled(true);
             this.userRepository.save(user);
             model.addAttribute("user", new User());
             httpSession.setAttribute("message", new Message("Successfully registered", "alert-success"));
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             model.addAttribute("user", user);
             httpSession.setAttribute("message", new Message("Something went wrong", "alert-danger"));
