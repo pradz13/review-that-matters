@@ -2,8 +2,10 @@ package com.proj.controller;
 
 import com.proj.entities.Post;
 import com.proj.entities.User;
+import com.proj.helper.Message;
 import com.proj.repository.PostRepository;
 import com.proj.repository.UserRepository;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,12 +44,18 @@ public class UserController {
     }
 
     @RequestMapping("/save-post")
-    public String addPost(@ModelAttribute("post") Post post, Model model) {
-        User user = (User) model.getAttribute("user");
-        post.setUser(user);
-        postRepository.save(post);
-        user.getPosts().add(post);
-        userRepository.save(user);
+    public String addPost(@ModelAttribute("post") Post post, Model model, HttpSession httpSession) {
+        try {
+            User user = (User) model.getAttribute("user");
+            post.setUser(user);
+            postRepository.save(post);
+            user.getPosts().add(post);
+            userRepository.save(user);
+            httpSession.setAttribute("message", new Message("Successfully added a new post", "alert-success"));
+        } catch (Exception e) {
+            e.printStackTrace();
+            httpSession.setAttribute("message", new Message("Something went wrong while adding a new post", "alert-danger"));
+        }
         return "normal/add_post";
     }
 }
