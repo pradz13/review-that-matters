@@ -14,7 +14,7 @@
                         <img class="mx-auto" style="width: 50px;" src="" th:src="@{/img/register.png}"/>
                     </div>
                     <h1 class="text-center">Login here</h1>
-                    <form novalidate action="#" th:action=@{/signin} method="post">
+                    <form novalidate action="#" th:action=@{/dologin} method="post">
                         <div th:if="${param.error}" class="alert alert-danger">
                             Invalid credentials
                         </div>

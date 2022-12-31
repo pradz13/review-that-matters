@@ -50,7 +50,9 @@ public class AppConfig {
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/signin");
+                .loginPage("/signin")
+                .loginProcessingUrl("/dologin")
+                .defaultSuccessUrl("/user/dashboard");
 
         http.authenticationProvider(authenticationProvider());
         return http.build();
