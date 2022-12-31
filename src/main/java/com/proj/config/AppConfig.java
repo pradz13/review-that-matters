@@ -49,7 +49,8 @@ public class AppConfig {
                 .requestMatchers("/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .formLogin();
+                .formLogin()
+                .loginPage("/signin");
 
         http.authenticationProvider(authenticationProvider());
         return http.build();

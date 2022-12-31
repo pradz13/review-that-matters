@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="base::layout(~{::section})">
+<head>
+    <meta charset="UTF-8">
+    <title>Review that matters</title>
+</head>
+<body>
+<section>
+    <div class="container mt-3 mb-3">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="my-card">
+                    <div class="container text-center">
+                        <img class="mx-auto" style="width: 50px;" src="" th:src="@{/img/register.png}"/>
+                    </div>
+                    <h1 class="text-center">Login here</h1>
+                    <form novalidate action="#" th:action=@{/signin} method="post">
+                        <div th:if="${param.error}" class="alert alert-danger">
+                            Invalid credentials
+                        </div>
+                        <div th:if="${param.logout}" class="alert alert-success">
+                            You have been logged out
+                        </div>
+                        <div class="form-group">
+                            <label for="username">Email</label>
+                            <input name="username" type="text" class="form-control" id="username"
+                                   aria-describedby="nameHelp" placeholder="Enter email"
+                                   required/>
+                        </div>
+                        <div class="form-group">
+                            <label for="password_field">Password</label>
+                            <input name="password" type="password" class="form-control" id="password_field"
+                                   aria-describedby="nameHelp" placeholder="Enter password" required/>
+                        </div>
+                        <div class="container text-center">
+                            <button type="submit" class="btn btn-primary bg-primary text-white">Login</button>
+                            <button type="reset" class="btn btn-primary bg-primary text-white">Reset</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>
