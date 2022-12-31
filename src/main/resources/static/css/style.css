@@ -59,6 +59,14 @@ body{
     margin-top: 10px;
 }
 
+.sidebar .closeBtn {
+    position: absolute;
+    top: 0;
+    right: 35px;
+    font-size: 36px;
+    cursor: pointer;
+}
+
 .content {
     margin-left : 20%;
 }
