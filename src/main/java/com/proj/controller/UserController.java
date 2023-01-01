@@ -58,4 +58,10 @@ public class UserController {
         }
         return "normal/add_post";
     }
+
+    @RequestMapping("/show-posts")
+    public String showContacts(Model model) {
+        model.addAttribute("title", "Show Posts");
+        return "normal/show-posts";
+    }
 }
