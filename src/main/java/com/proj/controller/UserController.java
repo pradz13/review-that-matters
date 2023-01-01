@@ -7,9 +7,13 @@ import com.proj.repository.PostRepository;
 import com.proj.repository.UserRepository;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
@@ -60,12 +64,15 @@ public class UserController {
         return "normal/add_post";
     }
 
-    @RequestMapping("/show-posts")
-    public String showPosts(Model model) {
+    @RequestMapping("/show-posts/{page}")
+    public String showPosts(@PathVariable("page") Integer page, Model model) {
         model.addAttribute("title", "Show Posts");
         User user = (User) model.getAttribute("user");
-        List<Post> posts = postRepository.getPostsByUser(user.getId());
+        Pageable pageable = PageRequest.of(page, 3);
+        Page<Post> posts = postRepository.getPostsByUser(user.getId(), pageable);
         model.addAttribute("posts", posts);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", posts.getTotalPages());
         return "normal/show-posts";
     }
 }
