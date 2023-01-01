@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 @RequestMapping("/user")
@@ -60,8 +61,11 @@ public class UserController {
     }
 
     @RequestMapping("/show-posts")
-    public String showContacts(Model model) {
+    public String showPosts(Model model) {
         model.addAttribute("title", "Show Posts");
+        User user = (User) model.getAttribute("user");
+        List<Post> posts = postRepository.getPostsByUser(user.getId());
+        model.addAttribute("posts", posts);
         return "normal/show-posts";
     }
 }

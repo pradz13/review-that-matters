@@ -6,7 +6,31 @@
 </head>
 <body>
 <section>
-    Show Posts
+    <div class="card mr-3 ml-3">
+        <div class="card-body">
+            <h1 class="text-center">Your posts</h1>
+            <table class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">Post Id</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="p : ${posts}">
+                    <td th:text="${p.id}">Id</td>
+                    <td th:text="${p.title}">Title</td>
+                    <td>
+                        <button class="btn btn-success btn-small">View Post</button>
+                        <button class="btn btn-primary btn-small">Edit</button>
+                        <button class="btn btn-danger btn-small">Delete</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </section>
 </body>
 </html>
