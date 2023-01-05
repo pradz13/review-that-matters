@@ -24,7 +24,7 @@
                     <td>
                         <button class="btn btn-success btn-small">View Post</button>
                         <button class="btn btn-primary btn-small">Edit</button>
-                        <button class="btn btn-danger btn-small">Delete</button>
+                        <a class="btn btn-danger btn-small" th:href="@{'/user/delete-posts/' + ${p.id}}">Delete</a>
                     </td>
                 </tr>
                 </tbody>

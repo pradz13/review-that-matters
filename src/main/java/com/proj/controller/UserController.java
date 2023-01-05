@@ -12,6 +12,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -74,5 +75,17 @@ public class UserController {
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", posts.getTotalPages());
         return "normal/show-posts";
+    }
+
+
+    @RequestMapping("/delete-posts/{postId}")
+    public String deletePost(@PathVariable("postId") Integer postId) {
+        Post postToBeDeleted = postRepository.findById(postId).get();
+        User user = postToBeDeleted.getUser();
+        user.getPosts().remove(postToBeDeleted);
+        userRepository.save(user);
+        postRepository.delete(postToBeDeleted);
+        System.out.println("Post deleted successfully");
+        return "redirect:/user/show-posts/0";
     }
 }
