@@ -6,23 +6,25 @@ import com.proj.helper.Message;
 import com.proj.repository.PostRepository;
 import com.proj.repository.UserRepository;
 import jakarta.servlet.http.HttpSession;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
-import java.util.List;
 
 @Controller
 @RequestMapping("/user")
 public class UserController {
+
+    Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
     private UserRepository userRepository;
@@ -85,7 +87,7 @@ public class UserController {
         user.getPosts().remove(postToBeDeleted);
         userRepository.save(user);
         postRepository.delete(postToBeDeleted);
-        System.out.println("Post deleted successfully");
+        logger.info("Post deleted successfully with id : {}", postId);
         return "redirect:/user/show-posts/0";
     }
 }
