@@ -1,5 +1,6 @@
 package com.proj.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -24,6 +25,9 @@ public class AppConfig {
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
+    @Autowired
+    private LoginSuccessHandler loginSuccessHandler;
 
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
@@ -52,7 +56,8 @@ public class AppConfig {
                 .formLogin()
                 .loginPage("/signin")
                 .loginProcessingUrl("/dologin")
-                .defaultSuccessUrl("/user/dashboard");
+                .successHandler(loginSuccessHandler); //For multiple user types, use this
+                //.defaultSuccessUrl("/user/dashboard"); //For single user types, use this
 
         http.authenticationProvider(authenticationProvider());
         return http.build();
