@@ -12,15 +12,17 @@
             <table class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                    <th scope="col">Post Id</th>
                     <th scope="col">Title</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Review posted on</th>
                     <th scope="col">Actions</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="p : ${posts}">
-                    <td th:text="${p.id}">Id</td>
                     <td th:text="${p.title}">Title</td>
+                    <td th:text="${p.status}">Status</td>
+                    <td th:text="${p.createTs}">Review Posted On</td>
                     <td>
                         <a class="btn btn-primary btn-small" th:href="@{'/user/edit-posts/' + ${p.id}}">Edit</a>
                         <a class="btn btn-danger btn-small" th:href="@{'/user/delete-posts/' + ${p.id}}">Delete</a>
