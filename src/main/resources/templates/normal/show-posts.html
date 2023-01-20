@@ -22,8 +22,7 @@
                     <td th:text="${p.id}">Id</td>
                     <td th:text="${p.title}">Title</td>
                     <td>
-                        <button class="btn btn-success btn-small">View Post</button>
-                        <button class="btn btn-primary btn-small">Edit</button>
+                        <a class="btn btn-primary btn-small" th:href="@{'/user/edit-posts/' + ${p.id}}">Edit</a>
                         <a class="btn btn-danger btn-small" th:href="@{'/user/delete-posts/' + ${p.id}}">Delete</a>
                     </td>
                 </tr>

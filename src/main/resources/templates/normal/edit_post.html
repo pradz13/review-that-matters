@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{normal/base::layout(~{::section})}">
+<head>
+    <meta charset="UTF-8">
+    <title>Review that matters</title>
+</head>
+<body>
+<section>
+    <div class="container mt-3 mb-3">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="my-card">
+                    <div th:if="${session.message}" th:classappend="${session.message.type}" class="alert" role="alert">
+                        <p class="text-center" th:text="${session.message.content}"></p>
+                    </div>
+                    <div class="container text-center">
+                        <img class="mx-auto" style="width: 50px;" src="" th:src="@{/img/register.png}"/>
+                    </div>
+
+                    <h1 class="text-center">Edit Post</h1>
+                    <form novalidate action="" th:action="@{/user/update-post}" method="post" th:object="${post}">
+                        <input type="hidden" th:field="*{id}" />
+                        <div class="form-group">
+                            <label for="title_field">Title</label>
+                            <input name="title" type="text" class="form-control" id="title_field"
+                                   aria-describedby="titleHelp" placeholder="Enter title of the post" required th:field="*{title}"/>
+                        </div>
+                        <div class="form-group">
+                            <textarea name="content" placeholder="Add content here"
+                                      rows="10" class="form-control" th:field="*{content}"></textarea>
+                        </div>
+                        <div class="container text-center">
+                            <button type="submit" class="btn btn-primary bg-primary text-white">Edit Post</button>
+                            <button type="reset" class="btn btn-primary bg-primary text-white">Reset</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>
