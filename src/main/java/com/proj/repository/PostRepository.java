@@ -13,6 +13,6 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
     @Query("from Post as p where p.user.id = :userId")
     public Page<Post> getPostsByUser(@Param("userId") int userId, Pageable pageable);
 
-    @Query("from Post as p where p.status='PENDING'")
+    @Query("from Post as p where p.status='PENDING' order by p.createTs desc")
     public Page<Post> getPostsPendingApproval(Pageable pageable);
 }

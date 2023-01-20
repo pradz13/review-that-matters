@@ -49,4 +49,20 @@ public class AdminController {
         model.addAttribute("totalPages", posts.getTotalPages());
         return "admin/show-posts-for-approval";
     }
+
+    @RequestMapping("/approve-post/{postId}")
+    public String approvePost(@PathVariable("postId") Integer postId) {
+        Post postToBeApproved = postRepository.findById(postId).get();
+        postToBeApproved.setStatus("APPROVED");
+        postRepository.save(postToBeApproved);
+        return "redirect:/admin/show-posts-pending-approval/0";
+    }
+
+    @RequestMapping("/reject-post/{postId}")
+    public String rejectPost(@PathVariable("postId") Integer postId) {
+        Post postToBeRejected = postRepository.findById(postId).get();
+        postToBeRejected.setStatus("REJECTED");
+        postRepository.save(postToBeRejected);
+        return "redirect:/admin/show-posts-pending-approval/0";
+    }
 }
