@@ -26,6 +26,6 @@ public class AdminController {
 
     @RequestMapping("/admin-dashboard")
     public String adminDashboard(Model model, Principal principal) {
-        return "normal/admin_dashboard";
+        return "admin/admin_dashboard";
     }
 }
