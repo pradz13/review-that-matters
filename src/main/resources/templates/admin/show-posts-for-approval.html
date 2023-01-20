@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{admin/admin-base::layout(~{::section})}">
+<head>
+    <meta charset="UTF-8">
+    <title>Review that matters</title>
+</head>
+<body>
+<section>
+    <div class="card mr-3 ml-3">
+        <div class="card-body">
+            <h1 class="text-center">Posts pending approval</h1>
+            <table class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">Title</th>
+                    <th scope="col">Review Posted by</th>
+                    <th scope="col">Review posted on</th>
+                    <th scope="col">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="p : ${posts}">
+                    <td th:text="${p.title}">Title</td>
+                    <td th:text="${p.user.name}">Review Posted by</td>
+                    <td th:text="${p.createTs}">Review Posted On</td>
+                    <td>
+                        <a class="btn btn-primary btn-small" th:href="@{'/user/edit-posts/' + ${p.id}}">Approve</a>
+                        <a class="btn btn-danger btn-small" th:href="@{'/user/delete-posts/' + ${p.id}}">Reject</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li th:if="${currentPage != 0}" class="page-item">
+                        <a class="page-link" th:href="@{'/admin/show-posts-pending-approval/' + ${currentPage-1}}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li th:classappend="${currentPage==i-1 ? 'active' : ''}"
+                        th:each="i : ${#numbers.sequence(1, totalPages)}" class="page-item">
+                        <a class="page-link" th:href="@{'/admin/show-posts-pending-approval/' + ${i-1}}"><span th:text="${i}"></span></a></li>
+
+                    <li th:if="${currentPage+1 != totalPages}" class="page-item">
+                        <a class="page-link" th:href="@{'/admin/show-posts-pending-approval/' + ${currentPage+1}}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</section>
+</body>
+</html>

@@ -12,4 +12,7 @@ import java.util.List;
 public interface PostRepository extends JpaRepository<Post, Integer> {
     @Query("from Post as p where p.user.id = :userId")
     public Page<Post> getPostsByUser(@Param("userId") int userId, Pageable pageable);
+
+    @Query("from Post as p where p.status='PENDING'")
+    public Page<Post> getPostsPendingApproval(Pageable pageable);
 }
