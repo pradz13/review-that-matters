@@ -15,4 +15,7 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
 
     @Query("from Post as p where p.status='PENDING' order by p.createTs desc")
     public Page<Post> getPostsPendingApproval(Pageable pageable);
+
+    @Query("from Post as p where p.status='APPROVED' order by p.createTs desc")
+    public Page<Post> getApprovedPosts(Pageable pageable);
 }
