@@ -29,4 +29,12 @@ public class ShowContentController {
         return "show-content";
     }
 
+    @RequestMapping("/single-post/{postId}")
+    public String viewPost(@PathVariable("postId") Integer postId, Model model) {
+        model.addAttribute("title", "Show Posts");
+        Post postToBeShown = postRepository.findById(postId).get();
+        model.addAttribute("post", postToBeShown);
+        return "show-single-post";
+    }
+
 }

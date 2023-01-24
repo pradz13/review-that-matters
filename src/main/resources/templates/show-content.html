@@ -23,7 +23,7 @@
           <td th:text="${p.user.name}">Review Posted by</td>
           <td th:text="${p.createTs}">Review Posted On</td>
           <td>
-            <a class="btn btn-primary btn-small" th:href="@{'/admin/approve-post/' + ${p.id}}">Read Post</a>
+            <a class="btn btn-primary btn-small" th:href="@{'/show-content/single-post/' + ${p.id}}">Read Post</a>
           </td>
         </tr>
         </tbody>
