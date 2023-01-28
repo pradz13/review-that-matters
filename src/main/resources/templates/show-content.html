@@ -23,7 +23,7 @@
           <td th:text="${p.user.name}">Review Posted by</td>
           <td th:text="${p.createTs}">Review Posted On</td>
           <td>
-            <a class="btn btn-primary btn-small" th:href="@{'/show-content/single-post/' + ${p.id}}">Read Post</a>
+            <a class="btn btn-primary btn-small" th:href="@{'/show-content/posts/' + ${p.id}}">Read Post</a>
           </td>
         </tr>
         </tbody>
@@ -31,16 +31,16 @@
       <nav aria-label="Page navigation example">
         <ul class="pagination">
           <li th:if="${currentPage != 0}" class="page-item">
-            <a class="page-link" th:href="@{'/show-content/posts/' + ${currentPage-1}}" aria-label="Previous">
+            <a class="page-link" th:href="@{'/show-content/view-posts-by-page/' + ${currentPage-1}}" aria-label="Previous">
               <span aria-hidden="true">&laquo;</span>
             </a>
           </li>
           <li th:classappend="${currentPage==i-1 ? 'active' : ''}"
               th:each="i : ${#numbers.sequence(1, totalPages)}" class="page-item">
-            <a class="page-link" th:href="@{'/show-content/posts/' + ${i-1}}"><span th:text="${i}"></span></a></li>
+            <a class="page-link" th:href="@{'/show-content/view-posts-by-page/' + ${i-1}}"><span th:text="${i}"></span></a></li>
 
           <li th:if="${currentPage+1 != totalPages}" class="page-item">
-            <a class="page-link" th:href="@{'/show-content/posts/' + ${currentPage+1}}" aria-label="Next">
+            <a class="page-link" th:href="@{'/show-content/view-posts-by-page/' + ${currentPage+1}}" aria-label="Next">
               <span aria-hidden="true">&raquo;</span>
             </a>
           </li>

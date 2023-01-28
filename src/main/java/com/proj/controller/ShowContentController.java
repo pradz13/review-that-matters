@@ -19,7 +19,7 @@ public class ShowContentController {
     @Autowired
     private PostRepository postRepository;
 
-    @RequestMapping("/posts/{page}")
+    @RequestMapping("/view-posts-by-page/{page}")
     public String viewPosts(@PathVariable("page") Integer page, Model model) {
         model.addAttribute("title", "Show Posts");
         Pageable pageable = PageRequest.of(page, 3);
@@ -30,7 +30,7 @@ public class ShowContentController {
         return "show-content";
     }
 
-    @RequestMapping("/single-post/{postId}")
+    @RequestMapping("/posts/{postId}")
     public String viewPost(@PathVariable("postId") Integer postId, Model model) {
         model.addAttribute("title", "Show Posts");
         Post postToBeShown = postRepository.findById(postId).get();
