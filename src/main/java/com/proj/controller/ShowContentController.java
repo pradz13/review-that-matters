@@ -41,5 +41,4 @@ public class ShowContentController {
         model.addAttribute("createdDt", formattedDate);
         return "show-single-post";
     }
-
 }
