@@ -10,7 +10,7 @@
         <div class="card-body">
             <h1 class="text-center" th:text="${post.title}">Post</h1>
             <h6 class="text-center" th:text="'Written by : ' +  ${post.user.name}">Author</h6>
-            <h6 class="text-center" th:text="'Date : ' +  ${post.createTs}">Date</h6>
+            <h6 class="text-center" th:text="'Date : ' +  ${createdDt}">Date</h6>
             <table class="table table-bordered table-striped">
                 <tbody>
                 <tr>

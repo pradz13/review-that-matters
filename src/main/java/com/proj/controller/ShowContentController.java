@@ -2,6 +2,7 @@ package com.proj.controller;
 
 import com.proj.entities.Post;
 import com.proj.repository.PostRepository;
+import com.proj.util.Utility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -10,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.time.format.DateTimeFormatter;
 
 @Controller
 @RequestMapping("/show-content")
@@ -34,6 +37,8 @@ public class ShowContentController {
         model.addAttribute("title", "Show Posts");
         Post postToBeShown = postRepository.findById(postId).get();
         model.addAttribute("post", postToBeShown);
+        String formattedDate = Utility.formatDate(postToBeShown.getCreateTs());
+        model.addAttribute("createdDt", formattedDate);
         return "show-single-post";
     }
 
