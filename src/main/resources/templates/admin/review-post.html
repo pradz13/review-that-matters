@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{admin/admin-base::layout(~{::section})}">
+<head>
+    <meta charset="UTF-8">
+    <title>Review that matters</title>
+</head>
+<body>
+<section>
+    <div class="card mr-3 ml-3">
+        <div class="card-body">
+            <h1 class="text-center" th:text="${post.title}">Post</h1>
+            <h6 class="text-center" th:text="'Written by : ' +  ${post.user.name}">Author</h6>
+            <h6 class="text-center" th:text="'Date : ' +  ${createdDt}">Date</h6>
+            <table class="table table-bordered table-striped">
+                <tbody>
+                <tr>
+                    <td style="white-space:pre-wrap; word-wrap:break-word" th:text="${post.content}">Content</td>
+                </tr>
+                </tbody>
+            </table>
+            <a class="btn btn-primary btn-small" th:href="@{'/admin/approve-post/' + ${post.id}}">Approve</a>
+            <a class="btn btn-danger btn-small" th:href="@{'/admin/reject-post/' + ${post.id}}">Reject</a>
+        </div>
+    </div>
+</section>
+</body>
+</html>

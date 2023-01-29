@@ -4,6 +4,7 @@ import com.proj.entities.Post;
 import com.proj.entities.User;
 import com.proj.repository.PostRepository;
 import com.proj.repository.UserRepository;
+import com.proj.util.Utility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -64,5 +65,14 @@ public class AdminController {
         postToBeRejected.setStatus("REJECTED");
         postRepository.save(postToBeRejected);
         return "redirect:/admin/show-posts-pending-approval/0";
+    }
+
+    @RequestMapping("/review-post/{postId}")
+    public String reviewPost(@PathVariable("postId") Integer postId, Model model) {
+        Post postToBeReviewed = postRepository.findById(postId).get();
+        model.addAttribute("post", postToBeReviewed);
+        String formattedDate = Utility.formatDate(postToBeReviewed.getCreateTs());
+        model.addAttribute("createdDt", formattedDate);
+        return "admin/review-post";
     }
 }

@@ -24,8 +24,8 @@
                     <td th:text="${p.user.name}">Review Posted by</td>
                     <td th:text="${p.createTs}">Review Posted On</td>
                     <td>
-                        <a class="btn btn-primary btn-small" th:href="@{'/admin/approve-post/' + ${p.id}}">Approve</a>
-                        <a class="btn btn-danger btn-small" th:href="@{'/admin/reject-post/' + ${p.id}}">Reject</a>
+                        <a class="btn btn-primary btn-small" th:href="@{'/admin/review-post/' + ${p.id}}">Review</a>
+                        <!--<a class="btn btn-danger btn-small" th:href="@{'/admin/reject-post/' + ${p.id}}">Reject</a>-->
                     </td>
                 </tr>
                 </tbody>
