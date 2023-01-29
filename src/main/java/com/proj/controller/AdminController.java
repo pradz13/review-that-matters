@@ -42,7 +42,6 @@ public class AdminController {
     @RequestMapping("/show-posts-pending-approval/{page}")
     public String showPosts(@PathVariable("page") Integer page, Model model) {
         model.addAttribute("title", "Show Posts");
-        User user = (User) model.getAttribute("user");
         Pageable pageable = PageRequest.of(page, 3);
         Page<Post> posts = postRepository.getPostsPendingApproval(pageable);
         model.addAttribute("posts", posts);
