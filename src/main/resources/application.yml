@@ -5,9 +5,9 @@ server:
 
 spring:
   datasource:
-    url: jdbc:mysql://containers-us-west-37.railway.app:5802/railway
+    url: jdbc:mysql://localhost:3306/review-that-matters
     username: root
-    password: dLB17lokOPUHXLzu8Q5h
+    password: Kolkata@1
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     properties:
